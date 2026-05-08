@@ -6,5 +6,6 @@ CREATE TABLE envios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     destinatario VARCHAR(100) NOT NULL,
     direccion VARCHAR(200) NOT NULL,
-    descripcion TEXT NOT NULL
+    descripcion TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
