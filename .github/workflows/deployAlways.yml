@@ -19,7 +19,7 @@ jobs:
           server: ftp-trainee115.alwaysdata.net # Change if using another host
           username: trainee115
           password: clase1234
-          server-dir: www/cliente4 # Replace with your correct path
+          server-dir: www/cliente4/ # Replace with your correct path
           protocol: ftps
           timeout: 86400000
           log-level: standard
