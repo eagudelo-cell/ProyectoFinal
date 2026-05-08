@@ -1,7 +1,63 @@
 <?php
 include("conexion.php");
 
-$sql = "SELECT * FROM envios";
+$accion = $_GET['accion'] ?? 'listar';
+
+/* CREAR */
+if ($accion == "crear" && $_POST) {
+    $destinatario = $_POST['destinatario'];
+    $direccion = $_POST['direccion'];
+    $descripcion = $_POST['descripcion'];
+
+    $sql = "INSERT INTO envios (destinatario, direccion, descripcion)
+            VALUES ('$destinatario', '$direccion', '$descripcion')";
+
+    if ($conn->query($sql)) {
+        header("Location: index.php");
+        exit();
+    }
+}
+
+/* EDITAR */
+if ($accion == "editar") {
+    $id = $_GET['id'];
+
+    if ($_POST) {
+        $destinatario = $_POST['destinatario'];
+        $direccion = $_POST['direccion'];
+        $descripcion = $_POST['descripcion'];
+
+        $update = "UPDATE envios
+                   SET destinatario='$destinatario',
+                       direccion='$direccion',
+                       descripcion='$descripcion'
+                   WHERE id=$id";
+
+        if ($conn->query($update)) {
+            header("Location: index.php");
+            exit();
+        }
+    }
+
+    $sql = "SELECT * FROM envios WHERE id=$id";
+    $resultado = $conn->query($sql);
+    $fila = $resultado->fetch_assoc();
+}
+
+/* ELIMINAR */
+if ($accion == "eliminar") {
+    $id = $_GET['id'];
+
+    $sql = "DELETE FROM envios WHERE id=$id";
+
+    if ($conn->query($sql)) {
+        header("Location: index.php");
+        exit();
+    }
+}
+
+/* LISTAR */
+$sql = "SELECT * FROM envios ORDER BY created_at DESC";
 $resultado = $conn->query($sql);
 ?>
 
@@ -10,7 +66,153 @@ $resultado = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Envíos</title>
-    <link rel="stylesheet" href="estilos.css">
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        .container{
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1{
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        .btn{
+            display: inline-block;
+            padding: 10px 18px;
+            background: #1f2937;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover{
+            background: #374151;
+        }
+
+        .cards-container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card{
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover{
+            transform: translateY(-5px);
+        }
+
+        .card h3{
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .card p{
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .acciones{
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .editar{
+            background: #2563eb;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .eliminar{
+            background: #dc2626;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .form-container{
+            width: 450px;
+            max-width: 95%;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container h2{
+            margin-bottom: 20px;
+            color: #1f2937;
+        }
+
+        form label{
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        form input,
+        form textarea{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+        }
+
+        form textarea{
+            resize: vertical;
+            height: 100px;
+        }
+
+        button{
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #111827;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover{
+            background: #374151;
+        }
+
+        .volver{
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+    </style>
 </head>
 <body>
 
@@ -18,48 +220,89 @@ $resultado = $conn->query($sql);
 
     <h1>Gestión de Envíos</h1>
 
-    <a href="crear.php" class="btn">+ Nuevo Envío</a>
+    <?php if ($accion == "crear") { ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Destinatario</th>
-                <th>Dirección</th>
-                <th>Descripción</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+        <div class="form-container">
+            <h2>Registrar Envío</h2>
 
-        <tbody>
+            <form method="POST">
+                <label>Destinatario</label>
+                <input type="text" name="destinatario" required>
 
-        <?php while($fila = $resultado->fetch_assoc()) { ?>
+                <label>Dirección</label>
+                <input type="text" name="direccion" required>
 
-            <tr>
-                <td><?php echo $fila['id']; ?></td>
-                <td><?php echo $fila['destinatario']; ?></td>
-                <td><?php echo $fila['direccion']; ?></td>
-                <td><?php echo $fila['descripcion']; ?></td>
+                <label>Descripción</label>
+                <textarea name="descripcion" required></textarea>
 
-                <td>
-                    <a class="editar" href="editar.php?id=<?php echo $fila['id']; ?>">Editar</a>
+                <button type="submit">Guardar</button>
+                <a href="index.php" class="volver">Volver</a>
+            </form>
+        </div>
 
-                    <a class="eliminar"
-                       href="eliminar.php?id=<?php echo $fila['id']; ?>"
-                       onclick="return confirm('¿Desea eliminar este envío?')">
-                       Eliminar
-                    </a>
-                </td>
-            </tr>
+    <?php } elseif ($accion == "editar") { ?>
 
-        <?php } ?>
+        <div class="form-container">
+            <h2>Editar Envío</h2>
 
-        </tbody>
-    </table>
+            <form method="POST">
+                <label>Destinatario</label>
+                <input type="text" name="destinatario"
+                       value="<?php echo $fila['destinatario']; ?>" required>
+
+                <label>Dirección</label>
+                <input type="text" name="direccion"
+                       value="<?php echo $fila['direccion']; ?>" required>
+
+                <label>Descripción</label>
+                <textarea name="descripcion" required><?php echo $fila['descripcion']; ?></textarea>
+
+                <button type="submit">Actualizar</button>
+                <a href="index.php" class="volver">Volver</a>
+            </form>
+        </div>
+
+    <?php } else { ?>
+
+        <a href="index.php?accion=crear" class="btn">+ Nuevo Envío</a>
+
+        <div class="cards-container">
+
+            <?php while($fila = $resultado->fetch_assoc()) { ?>
+
+                <div class="card">
+                    <h3><?php echo $fila['destinatario']; ?></h3>
+
+                    <p><strong>Dirección:</strong> <?php echo $fila['direccion']; ?></p>
+
+                    <p><strong>Descripción:</strong> <?php echo $fila['descripcion']; ?></p>
+
+                    <p><strong>Fecha:</strong>
+                        <?php echo date("d/m/Y H:i", strtotime($fila['created_at'])); ?>
+                    </p>
+
+                    <div class="acciones">
+                        <a class="editar"
+                           href="index.php?accion=editar&id=<?php echo $fila['id']; ?>">
+                           Editar
+                        </a>
+
+                        <a class="eliminar"
+                           href="index.php?accion=eliminar&id=<?php echo $fila['id']; ?>"
+                           onclick="return confirm('¿Desea eliminar este envío?')">
+                           Eliminar
+                        </a>
+                    </div>
+                </div>
+
+            <?php } ?>
+
+        </div>
+
+    <?php } ?>
 
 </div>
 
 </body>
 </html>
-
 
