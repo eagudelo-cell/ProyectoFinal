@@ -68,150 +68,216 @@ $resultado = $conn->query($sql);
     <title>Gestión de Envíos</title>
 
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body{
-            background: #f4f6f9;
-            color: #333;
-        }
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        .container{
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px auto;
-        }
+body{
+    background: #f4f6f9;
+    color: #333;
+    overflow-x: hidden;
+}
 
-        h1{
-            margin-bottom: 20px;
-            color: #1f2937;
-        }
+.container{
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+}
 
-        .btn{
-            display: inline-block;
-            padding: 10px 18px;
-            background: #1f2937;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
+h1{
+    margin-bottom: 20px;
+    color: #1f2937;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    text-align: center;
+}
 
-        .btn:hover{
-            background: #374151;
-        }
+.btn{
+    display: inline-block;
+    padding: 12px 20px;
+    background: #1f2937;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-size: clamp(14px, 2vw, 16px);
+}
 
-        .cards-container{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+.btn:hover{
+    background: #374151;
+}
 
-        .card{
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease;
-        }
+.cards-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-        .card:hover{
-            transform: translateY(-5px);
-        }
+.card{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+    width: 100%;
+}
 
-        .card h3{
-            color: #111827;
-            margin-bottom: 12px;
-        }
+.card:hover{
+    transform: translateY(-5px);
+}
 
-        .card p{
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
+.card h3{
+    color: #111827;
+    margin-bottom: 12px;
+    font-size: clamp(18px, 2vw, 22px);
+    word-wrap: break-word;
+}
 
-        .acciones{
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
+.card p{
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: clamp(14px, 2vw, 16px);
+    word-wrap: break-word;
+}
 
-        .editar{
-            background: #2563eb;
-            color: white;
-            padding: 7px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
+.acciones{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-        .eliminar{
-            background: #dc2626;
-            color: white;
-            padding: 7px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
+.editar,
+.eliminar{
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    color: white;
+    padding: 10px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: clamp(13px, 2vw, 15px);
+}
 
-        .form-container{
-            width: 450px;
-            max-width: 95%;
-            margin: 60px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-        }
+.editar{
+    background: #2563eb;
+}
 
-        .form-container h2{
-            margin-bottom: 20px;
-            color: #1f2937;
-        }
+.eliminar{
+    background: #dc2626;
+}
 
-        form label{
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
+.form-container{
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+}
 
-        form input,
-        form textarea{
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 5px;
-        }
+.form-container h2{
+    margin-bottom: 20px;
+    color: #1f2937;
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
 
-        form textarea{
-            resize: vertical;
-            height: 100px;
-        }
+form label{
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: clamp(14px, 2vw, 16px);
+}
 
-        button{
-            margin-top: 20px;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: #111827;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+form input,
+form textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
-        button:hover{
-            background: #374151;
-        }
+form textarea{
+    resize: vertical;
+    min-height: 100px;
+}
 
-        .volver{
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            text-decoration: none;
-            color: #2563eb;
-        }
+button{
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: #111827;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: clamp(15px, 2vw, 17px);
+}
+
+button:hover{
+    background: #374151;
+}
+
+.volver{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #2563eb;
+    font-size: clamp(14px, 2vw, 16px);
+}
+
+/* TABLETS */
+@media (max-width: 768px){
+    .container{
+        width: 95%;
+    }
+
+    .btn{
+        width: 100%;
+        text-align: center;
+    }
+
+    .acciones{
+        flex-direction: column;
+    }
+
+    .editar,
+    .eliminar{
+        width: 100%;
+    }
+}
+
+/* CELULARES */
+@media (max-width: 480px){
+    .container{
+        padding: 5px;
+    }
+
+    .card{
+        padding: 15px;
+    }
+
+    .form-container{
+        padding: 20px;
+    }
+
+    form input,
+    form textarea,
+    button{
+        font-size: 15px;
+    }
+}
+</style>
     </style>
 </head>
 <body>
