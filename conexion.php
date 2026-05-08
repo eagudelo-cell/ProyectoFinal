@@ -1,13 +1,16 @@
 <?php
+
 $host = "mysql-edwinagudelo.alwaysdata.net";
-$user = "edwinagudelo";
+$usuario = "edwinagudelo";
 $password = "clase1234";
-$db = "mensajeria";
+$bd = "edwinagudelo_mensajeria";
 
-$conn = new mysqli($host, $edwinagudelo, $clase1234, $bd);
+$conn = new mysqli($host, $usuario, $password, $bd);
 
-if($conn->connect_error){
+if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
+
+$conn->set_charset("utf8");
 
 ?>
