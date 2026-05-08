@@ -2,7 +2,7 @@
 $host = "mysql-edwinagudelo.alwaysdata.net";
 $user = "edwinagudelo";
 $password = "clase1234";
-$db = "edwinagudelo_mensajeria";
+$db = "mensajeria";
 
 $conn = new mysqli($host, $usuario, $password, $bd);
 
