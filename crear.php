@@ -43,6 +43,8 @@ if($_POST){
         <input type="text" name="telefono" required>
 
         <label>Descripción</label>
+        <input type="text" name="descripcion" required>
+
         <textarea name="descripcion" required></textarea>
 
         <button type="submit">Guardar</button>
