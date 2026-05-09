@@ -1,6 +1,3 @@
-CREATE DATABASE mensajeria;
-
-USE mensajeria;
 
 CREATE TABLE envios (
     id INT AUTO_INCREMENT PRIMARY KEY,
