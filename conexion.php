@@ -3,7 +3,7 @@
 $host = "mysql-yesidsan.alwaysdata.net";
 $usuario = "yesidsan";
 $password = "Cc14635767";
-$bd = "yesidsan_mensajeria";
+$bd = "yesidsan_proyectofinalenvios";
 
 $conn = new mysqli($host, $usuario, $password, $bd);
 
