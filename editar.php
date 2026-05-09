@@ -13,7 +13,7 @@ if($_POST){
     $destinatario = $_POST['destinatario'];
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
-    $descripcion = $_POST['descripcion'];
+    $descripcion = $_POST['descripcion']
 
     $update = "UPDATE envios
                SET destinatario='$destinatario',
@@ -62,7 +62,10 @@ if($_POST){
                required>
 
         <label>Descripción</label>
-        <textarea name="descripcion" required><?php echo $fila['descripcion']; ?></textarea>
+        <input type="text"
+               name="descripcion"
+               value="<?php echo $fila['descripcion']; ?>"
+               required>
 
         <button type="submit">Actualizar</button>
 
