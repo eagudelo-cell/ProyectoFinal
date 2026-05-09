@@ -26,6 +26,7 @@ $resultado = $conn->query($sql);
                 <th>ID</th>
                 <th>Destinatario</th>
                 <th>Dirección</th>
+                <th>Teléfono</th>
                 <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
