@@ -5,11 +5,10 @@ if($_POST){
 
     $destinatario = $_POST['destinatario'];
     $direccion = $_POST['direccion'];
-    $telefono = $_POST['telefono'];
     $descripcion = $_POST['descripcion'];
 
-    $sql = "INSERT INTO envios(destinatario, direccion, telefono, descripcion)
-            VALUES('$destinatario', '$direccion', '$telefono', '$descripcion')";
+    $sql = "INSERT INTO envios(destinatario, direccion, descripcion)
+            VALUES('$destinatario', '$direccion', '$descripcion')";
 
     if($conn->query($sql)){
         header("Location: index.php");
@@ -39,12 +38,7 @@ if($_POST){
         <label>Dirección</label>
         <input type="text" name="direccion" required>
 
-        <label>Teléfono</label>
-        <input type="text" name="telefono" required>
-
         <label>Descripción</label>
-        <input type="text" name="descripcion" required>
-
         <textarea name="descripcion" required></textarea>
 
         <button type="submit">Guardar</button>

@@ -26,7 +26,6 @@ $resultado = $conn->query($sql);
                 <th>ID</th>
                 <th>Destinatario</th>
                 <th>Dirección</th>
-                <th>Teléfono</th>
                 <th>Descripción</th>
                 <th>Acciones</th>
             </tr>
@@ -40,7 +39,6 @@ $resultado = $conn->query($sql);
                 <td><?php echo $fila['id']; ?></td>
                 <td><?php echo $fila['destinatario']; ?></td>
                 <td><?php echo $fila['direccion']; ?></td>
-                <td><?php echo $fila['telefono']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
 
                 <td>
