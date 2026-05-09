@@ -18,7 +18,9 @@ $resultado = $conn->query($sql);
 
     <h1>Gestión de Envíos</h1>
 
-    <a href="crear.php" class="btn">+ Nuevo Envío</a>
+    <a href="crear.php" class="btn btn-crear">
+        <span class="btn-icon">➕</span> Nuevo Envío
+    </a>
 
     <table>
         <thead>
