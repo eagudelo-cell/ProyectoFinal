@@ -1,9 +1,9 @@
 <?php
 
-$host = "mysql-yesidsan.alwaysdata.net";
-$usuario = "yesidsan";
-$password = "Cc14635767";
-$bd = "yesidsan_mensajeria";
+$host = "mysql-edwinagudelo.alwaysdata.net";
+$usuario = "edwinagudelo";
+$password = "clase1234";
+$bd = "edwinagudelo_mensajeria";
 
 $conn = new mysqli($host, $usuario, $password, $bd);
 
