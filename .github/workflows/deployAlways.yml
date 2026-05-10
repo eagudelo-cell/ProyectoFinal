@@ -17,8 +17,8 @@ jobs:
         with:
           server: ftp-yesidsan.alwaysdata.net # Change if using another host
           username: yesidsan
-          password: C14635767
-          server-dir: www/ # Replace with your correct path
+          password: Cc14635767
+          server-dir: www/cliente1/ # Replace with your correct path
           protocol: ftps
           timeout: 86400000
           log-level: standard
