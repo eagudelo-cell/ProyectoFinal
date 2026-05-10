@@ -2,8 +2,7 @@ name: 🚀 Tarea de Despliegue
 
 on:
    push:
-     branches:
-       - main
+
 
 jobs:
   deploy:
@@ -17,9 +16,9 @@ jobs:
       - name: 📂 Sincronizando archivos via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp-edwinagudelo.alwaysdata.net # Change if using another host
-          username: edwinagudelo
-          password: clase1234
+          server: ftp-mina.alwaysdata.net # Change if using another host
+          username: mina
+          password: inve123
           server-dir: www/ # Replace with your correct path
           protocol: ftps
           timeout: 86400000

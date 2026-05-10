@@ -40,6 +40,7 @@ $resultado = $conn->query($sql);
                 <td><?php echo $fila['id']; ?></td>
                 <td><?php echo $fila['destinatario']; ?></td>
                 <td><?php echo $fila['direccion']; ?></td>
+                <td><?php echo $fila['telefono']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
 
                 <td>

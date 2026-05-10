@@ -12,11 +12,13 @@ if($_POST){
 
     $destinatario = $_POST['destinatario'];
     $direccion = $_POST['direccion'];
+    $telefono = $_POST['telefono'];
     $descripcion = $_POST['descripcion'];
 
     $update = "UPDATE envios
                SET destinatario='$destinatario',
                    direccion='$direccion',
+                   telefono='$telefono',
                    descripcion='$descripcion'
                WHERE id=$id";
 
@@ -46,6 +48,12 @@ if($_POST){
                name="destinatario"
                value="<?php echo $fila['destinatario']; ?>"
                required>
+               
+        <label>Teléfono</label>
+        <input type="text"
+               name="telefono"
+               value="<?php echo $fila['telefono']; ?>"
+               required>
 
         <label>Dirección</label>
         <input type="text"
@@ -54,6 +62,10 @@ if($_POST){
                required>
 
         <label>Descripción</label>
+        <input type="text"
+               name="descripcion"
+               value="<?php echo $fila['descripcion']; ?>"
+               required>
         <textarea name="descripcion" required><?php echo $fila['descripcion']; ?></textarea>
 
         <button type="submit">Actualizar</button>
