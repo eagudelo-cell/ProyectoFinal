@@ -2,7 +2,7 @@
 
 $host = "mysql-cardonalan.alwaysdata.net";
 $usuario = "cardonalan";
-$password = "clase1234";
+$password = "clase12";
 $bd = "cardonalan_mensajeria";
 
 $conn = new mysqli($host, $usuario, $password, $bd);
