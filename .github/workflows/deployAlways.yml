@@ -2,8 +2,7 @@ name: 🚀 Tarea de Despliegue
 
 on:
    push:
-
-
+    
 jobs:
   deploy:
     name: 🎉 Trabajo de Despliegue
@@ -16,8 +15,8 @@ jobs:
       - name: 📂 Sincronizando archivos via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp-edwinagudelo.alwaysdata.net # Change if using another host
-          username: edwinagudelo
+          server: ftp-cardonalan.alwaysdata.net # Change if using another host
+          username: cardonalan
           password: clase1234
           server-dir: www/ # Replace with your correct path
           protocol: ftps
@@ -26,3 +25,4 @@ jobs:
           exclude: |
            .git/**
            .github/**
+
