@@ -21,29 +21,31 @@ if($_POST){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo Envío</title>
+    <title>Nuevo Env&iacute;o</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
 <div class="form-container">
 
-    <h2>Registrar Envío</h2>
+    <div class="eyebrow">Nuevo registro</div>
+    <h2>Registrar Env&iacute;o</h2>
+    <p>Agrega los datos del paquete para mantener tu lista de entregas al dia.</p>
 
     <form method="POST">
 
         <label>Destinatario</label>
-        <input type="text" name="destinatario" required>
+        <input type="text" name="destinatario" placeholder="Nombre del destinatario" required>
 
-        <label>Dirección</label>
-        <input type="text" name="direccion" required>
+        <label>Direcci&oacute;n</label>
+        <input type="text" name="direccion" placeholder="Direccion completa de entrega" required>
 
-        <label>Descripción</label>
-        <textarea name="descripcion" required></textarea>
+        <label>Descripci&oacute;n</label>
+        <textarea name="descripcion" placeholder="Detalles del paquete o indicaciones" required></textarea>
 
-        <button type="submit">Guardar</button>
+        <button type="submit">Guardar envio</button>
 
-        <a href="index.php" class="volver">Volver</a>
+        <a href="index.php" class="volver">Volver al panel</a>
 
     </form>
 

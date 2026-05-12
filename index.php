@@ -9,55 +9,75 @@ $resultado = $conn->query($sql);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Envíos</title>
+    <title>Gesti&oacute;n de Env&iacute;os</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>Gestión de Envíos</h1>
+    <section class="hero">
+        <div class="hero-copy">
+            <div>
+                <div class="eyebrow">Panel logistico</div>
+                <h1>Gesti&oacute;n de Env&iacute;os</h1>
+                <p>Organiza destinatarios, direcciones y detalles de cada paquete con una vista moderna, clara y facil de usar.</p>
+            </div>
 
-    <a href="crear.php" class="btn btn-crear">
-        <span class="btn-icon">➕</span> Nuevo Envío
-    </a>
+            <div class="hero-actions">
+                <a href="crear.php" class="btn btn-crear">
+                    <span class="btn-icon">+</span> Nuevo Env&iacute;o
+                </a>
+                <a href="#tabla-envios" class="btn btn-secundario">
+                    Ver registros
+                </a>
+            </div>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Destinatario</th>
-                <th>Dirección</th>
-                <th>Descripción</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+        <aside class="hero-card">
+            <strong><?php echo $resultado->num_rows; ?></strong>
+            <span>env&iacute;os registrados en el sistema</span>
+        </aside>
+    </section>
 
-        <tbody>
+    <div class="table-panel" id="tabla-envios">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Destinatario</th>
+                    <th>Direcci&oacute;n</th>
+                    <th>Descripci&oacute;n</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
 
-        <?php while($fila = $resultado->fetch_assoc()) { ?>
+            <tbody>
 
-            <tr>
-                <td><?php echo $fila['id']; ?></td>
-                <td><?php echo $fila['destinatario']; ?></td>
-                <td><?php echo $fila['direccion']; ?></td>
-                <td><?php echo $fila['descripcion']; ?></td>
+            <?php while($fila = $resultado->fetch_assoc()) { ?>
 
-                <td>
-                    <a class="editar" href="editar.php?id=<?php echo $fila['id']; ?>">Editar</a>
+                <tr>
+                    <td><?php echo $fila['id']; ?></td>
+                    <td><?php echo $fila['destinatario']; ?></td>
+                    <td><?php echo $fila['direccion']; ?></td>
+                    <td><?php echo $fila['descripcion']; ?></td>
 
-                    <a class="eliminar"
-                       href="eliminar.php?id=<?php echo $fila['id']; ?>"
-                       onclick="return confirm('¿Desea eliminar este envío?')">
-                       Eliminar
-                    </a>
-                </td>
-            </tr>
+                    <td>
+                        <a class="editar" href="editar.php?id=<?php echo $fila['id']; ?>">Editar</a>
 
-        <?php } ?>
+                        <a class="eliminar"
+                           href="eliminar.php?id=<?php echo $fila['id']; ?>"
+                           onclick="return confirm('&iquest;Desea eliminar este envio?')">
+                           Eliminar
+                        </a>
+                    </td>
+                </tr>
 
-        </tbody>
-    </table>
+            <?php } ?>
+
+            </tbody>
+        </table>
+    </div>
 
 </div>
 

@@ -30,14 +30,16 @@ if($_POST){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Envío</title>
+    <title>Editar Env&iacute;o</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
 <div class="form-container">
 
-    <h2>Editar Envío</h2>
+    <div class="eyebrow">Actualizar datos</div>
+    <h2>Editar Env&iacute;o</h2>
+    <p>Ajusta la informacion del paquete antes de guardarla nuevamente.</p>
 
     <form method="POST">
 
@@ -47,18 +49,18 @@ if($_POST){
                value="<?php echo $fila['destinatario']; ?>"
                required>
 
-        <label>Dirección</label>
+        <label>Direcci&oacute;n</label>
         <input type="text"
                name="direccion"
                value="<?php echo $fila['direccion']; ?>"
                required>
 
-        <label>Descripción</label>
+        <label>Descripci&oacute;n</label>
         <textarea name="descripcion" required><?php echo $fila['descripcion']; ?></textarea>
 
-        <button type="submit">Actualizar</button>
+        <button type="submit">Actualizar envio</button>
 
-        <a href="index.php" class="volver">Volver</a>
+        <a href="index.php" class="volver">Volver al panel</a>
 
     </form>
 
